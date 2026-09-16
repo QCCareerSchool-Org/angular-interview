@@ -1,0 +1,25 @@
+<input
+  type="text"
+  class="input"
+  placeholder="Search products..."
+  [formControl]="searchControl"
+/>
+
+@if (!loading()) {
+  <div class="results">
+    @for (product of results(); track product.id) {
+      <div class="product-card">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.price | currency }}</p>
+      </div>
+    }
+
+    @if (results().length === 0) {
+      <p>No products found.</p>
+    }
+  </div>
+}
+
+@if (loading()) {
+  <p>Loading...</p>
+}
